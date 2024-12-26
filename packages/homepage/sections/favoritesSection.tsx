@@ -1,4 +1,4 @@
-import { FavoriteCard } from '@/packages/components/favoriteCard';
+import { FavoriteCard } from '@/packages/homepage/components/favoriteCard';
 import { Playball } from 'next/font/google';
 
 // Initialize the Playball font with specific configurations
