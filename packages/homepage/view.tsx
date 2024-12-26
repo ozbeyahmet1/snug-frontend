@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 import FavoritesSection from './sections/favoritesSection';
 import HeroSection from './sections/heroSection';
+import TestimonalsSection from './sections/testimonalsSection';
 
 export default function HomepageView() {
   const slides = [
@@ -27,6 +28,7 @@ export default function HomepageView() {
       <FullWidthSlider slides={slides} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} />
       <HeroSection boxColor={slides[currentIndex].bgColor} />
       <FavoritesSection />
+      <TestimonalsSection />
     </div>
   );
 }

@@ -51,7 +51,7 @@ const TopBar: React.FC<TopBarProps> = ({ slides, currentIndex, setCurrentIndex }
   }, []);
 
   return (
-    <div className="fixed overflow-hidden w-full top-0">
+    <div className="fixed overflow-hidden w-full top-0 z-[9999]">
       {/* Slides Container */}
       <div
         className="flex transition-transform duration-500 ease-in-out"

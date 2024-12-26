@@ -46,7 +46,7 @@ export function HamburgerMenu({ children }: PropsWithChildren) {
   return (
     <Sheet>
       <SheetTrigger asChild>{children}</SheetTrigger>
-      <SheetContent side="left">
+      <SheetContent side="left" className="z-[99999]">
         <SheetHeader>
           <SheetTitle>Our Pillow Collection</SheetTitle>
           <SheetDescription>

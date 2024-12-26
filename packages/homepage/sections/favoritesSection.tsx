@@ -45,7 +45,7 @@ export default function FavoritesSection() {
     <section className="container flex items-center flex-col mx-auto py-20">
       <p className={`text-2xl ${greatVibes.className}`}>A few our</p>
       <h3 className="uppercase text-[60px]">Favorites</h3>
-      <div className="grid grid-cols-2 gap-[2px] lg:grid-cols-4 justify-center w-full">
+      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-[2px] justify-center w-full">
         {favoriteItems.map((item, index) => (
           <FavoriteCard
             key={index}

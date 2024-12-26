@@ -49,7 +49,7 @@ function LeftGrid({ boxColor }: HeroSectionProps): JSX.Element {
     'https://res.cloudinary.com/dhx4s2n3l/image/upload/v1735089614/DALL_E_2024-12-25_04.19.53_-_A_stack_of_four_rectangular_pillows_arranged_neatly_on_top_of_one_another_each_with_a_unique_color_and_texture._The_top_pillow_is_light_brown_follo_thuqu9.webp',
     'https://res.cloudinary.com/dhx4s2n3l/image/upload/v1735089722/DALL_E_2024-12-25_04.21.50_-_A_single_rectangular_pillow_placed_on_a_soft_and_inviting_bed_in_a_cozy_bedroom_setting._The_pillow_is_light_beige_with_a_smooth_fabric_cover_and_subt_crmsm2.webp',
     'https://res.cloudinary.com/dhx4s2n3l/image/upload/v1735089817/DALL_E_2024-12-25_04.23.22_-_A_single_rectangular_pillow_in_a_vibrant_teal_color_placed_on_a_modern_gray_couch_in_a_living_room_setup._The_background_features_a_soft_beige_wall_co_mdt7rv.webp',
-    'https://res.cloudinary.com/dhx4s2n3l/image/upload/v1735088894/Outdoor_Toodles_Square_Sunbrella_Pillow_Cover_26_Insert_jmmlns-removebg-preview_iok7rm.png',
+    'https://res.cloudinary.com/dhx4s2n3l/image/upload/v1735185514/pill_im6y1q.png',
     'https://res.cloudinary.com/dhx4s2n3l/image/upload/v1735088718/V240034V240090V250070V150766_ee838dc4-f4af-4ada-9c90-f9a2e4ac8bc1_m5bx58.jpg',
   ];
 

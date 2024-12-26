@@ -21,9 +21,15 @@ export function FavoriteCard({
   bgOpacity: number;
 }) {
   return (
-    <div className="flex-1 flex flex-col">
-      <div className={`bg-[#DEDDD4] h-96 flex items-center justify-center bg-opacity-${bgOpacity}`}>
-        <Image height={250} width={250} alt={title} src={imageSrc} className="" />
+    <div className="flex-1 flex flex-col group cursor-pointer">
+      <div className={`bg-[#DEDDD4] h-80 lg:h-96 flex items-center justify-center bg-opacity-${bgOpacity}`}>
+        <Image
+          height={250}
+          width={250}
+          alt={title}
+          src={imageSrc}
+          className="transition-transform duration-300 group-hover:scale-110"
+        />
       </div>
       <h3 className="mt-3 text-lg">{title}</h3>
       <p className="font-bold">{price}</p>

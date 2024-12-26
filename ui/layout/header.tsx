@@ -28,7 +28,7 @@ export default function Header({}: PropsWithChildren): JSX.Element {
         <Logo />
 
         {/* Desktop Navigation Menu */}
-        <NavMenu className="hidden lg:flex" />
+        <NavMenu className="hidden lg:flex z-[99999] relative" />
 
         {/* Right-side Actions */}
         <div className="flex items-center space-x-2">
