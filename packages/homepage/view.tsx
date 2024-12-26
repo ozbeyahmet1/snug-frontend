@@ -3,6 +3,7 @@
 import FullWidthSlider from '@/ui/layout/topBar';
 import { useState } from 'react';
 
+import BannerSection from './sections/bannerSection';
 import FavoritesSection from './sections/favoritesSection';
 import HeroSection from './sections/heroSection';
 import TestimonalsSection from './sections/testimonalsSection';
@@ -29,6 +30,7 @@ export default function HomepageView() {
       <HeroSection boxColor={slides[currentIndex].bgColor} />
       <FavoritesSection />
       <TestimonalsSection />
+      <BannerSection />
     </div>
   );
 }
