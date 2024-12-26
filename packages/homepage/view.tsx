@@ -3,6 +3,8 @@
 import FullWidthSlider from '@/ui/layout/topBar';
 import { useState } from 'react';
 
+import HeroSection from './sections/heroSection';
+
 export default function HomepageView() {
   const slides = [
     {
@@ -11,7 +13,7 @@ export default function HomepageView() {
     },
     {
       content: 'New styles added: Save up to 50% off on select gifts',
-      bgColor: 'bg-blue-500',
+      bgColor: 'bg-blue-700',
     },
     {
       content: 'Shop now. Pay with Stripe',
@@ -22,6 +24,7 @@ export default function HomepageView() {
   return (
     <div>
       <FullWidthSlider slides={slides} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} />
+      <HeroSection boxColor={slides[currentIndex].bgColor} />
     </div>
   );
 }
