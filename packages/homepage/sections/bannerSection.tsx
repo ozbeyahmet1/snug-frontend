@@ -12,7 +12,7 @@ import { IoIosArrowRoundForward } from 'react-icons/io';
  */
 export default function BannerSection(): JSX.Element {
   return (
-    <div className="w-full flex flex-col lg:flex-row my-20">
+    <div className="w-full flex flex-col lg:flex-row mt-20">
       {/* Image Section */}
       <ImageSection />
 
