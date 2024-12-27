@@ -4,6 +4,7 @@ import FullWidthSlider from '@/ui/layout/topBar';
 import { useState } from 'react';
 
 import BannerSection from './sections/bannerSection';
+import DiscountBanner from './sections/discountBanner';
 import FavoritesSection from './sections/favoritesSection';
 import HeroSection from './sections/heroSection';
 import TestimonalsSection from './sections/testimonalsSection';
@@ -31,6 +32,7 @@ export default function HomepageView() {
       <FavoritesSection />
       <TestimonalsSection />
       <BannerSection />
+      <DiscountBanner />
     </div>
   );
 }
