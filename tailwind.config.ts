@@ -8,6 +8,7 @@ export default {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     './packages/**/*.{js,ts,jsx,tsx,mdx}',
     './ui/**/*.{js,ts,jsx,tsx,mdx}',
+    './features/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {

@@ -2,12 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  z-index: 1;
 }
 
-@layer base {
-  :root {
-    --radius: 0.5rem;
-  }
+html {
+  scroll-behavior: smooth;
+  font-size: 100%;
+  overscroll-behavior: none;
+}
+
+html body[data-scroll-locked] {
+  overscroll-behavior: none !important;
+  position: fixed !important;
+  padding-top: 80px !important;
+  margin-right: 0 !important;
 }
