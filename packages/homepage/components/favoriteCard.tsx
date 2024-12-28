@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 /**
  * Represents a single favorite item card.
@@ -14,14 +15,16 @@ export function FavoriteCard({
   price,
   imageSrc,
   bgOpacity,
+  href,
 }: {
   title: string;
   price: string;
   imageSrc: string;
   bgOpacity: number;
+  href?: string;
 }) {
   return (
-    <div className="flex-1 flex flex-col group cursor-pointer">
+    <Link className="flex-1 flex flex-col group cursor-pointer" href={`/product/${href}`}>
       <div className={`bg-[#DEDDD4] h-80 lg:h-96 flex items-center justify-center bg-opacity-${bgOpacity}`}>
         <Image
           height={250}
@@ -33,6 +36,6 @@ export function FavoriteCard({
       </div>
       <h3 className="mt-3 text-lg">{title}</h3>
       <p className="font-bold">{price}</p>
-    </div>
+    </Link>
   );
 }

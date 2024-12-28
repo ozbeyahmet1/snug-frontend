@@ -89,7 +89,7 @@ export function CartDrawer({ children }: PropsWithChildren) {
           ))}
         </div>
         <div className="flex justify-end flex-col text-sm">
-          <div className="border-2 border-t p-3 flex items-center justify-between">
+          <div className=" border-y-[1px] p-3 flex items-center justify-between">
             <div className="flex items-center space-x-1">
               <p>Subtotal:</p>
               <p className="font-bold">$47.94</p>

@@ -20,24 +20,28 @@ export default function FavoritesSection() {
       price: '$295',
       imageSrc: 'https://res.cloudinary.com/dhx4s2n3l/image/upload/v1735183620/PE932867-removebg-preview_d8meop.png',
       bgOpacity: 25,
+      href: 'the-bigger-carry-on',
     },
     {
       title: 'The Bigger Carry-on',
       price: '$295',
       imageSrc: 'https://res.cloudinary.com/dhx4s2n3l/image/upload/v1735183620/PE932867-removebg-preview_d8meop.png',
       bgOpacity: 50,
+      href: 'the-bigger-carry-on',
     },
     {
       title: 'The Bigger Carry-on',
       price: '$295',
       imageSrc: 'https://res.cloudinary.com/dhx4s2n3l/image/upload/v1735183620/PE932867-removebg-preview_d8meop.png',
       bgOpacity: 75,
+      href: 'the-bigger-carry-on',
     },
     {
       title: 'The Bigger Carry-on',
       price: '$295',
       imageSrc: 'https://res.cloudinary.com/dhx4s2n3l/image/upload/v1735183620/PE932867-removebg-preview_d8meop.png',
       bgOpacity: 100,
+      href: 'the-bigger-carry-on',
     },
   ];
 
@@ -53,6 +57,7 @@ export default function FavoritesSection() {
             price={item.price}
             imageSrc={item.imageSrc}
             bgOpacity={item.bgOpacity}
+            href={item.href}
           />
         ))}
       </div>

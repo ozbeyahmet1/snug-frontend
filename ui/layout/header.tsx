@@ -16,7 +16,7 @@ import { NavMenu } from './navMenu';
  */
 export default function Header({}: PropsWithChildren): JSX.Element {
   return (
-    <header className="w-full py-3 mt-8 fixed top-0 bg-white z-[999]">
+    <header className="w-full py-3 mt-8 fixed top-0 bg-white z-[999] shadow-md">
       <div className="max-sm:px-5 container mx-auto flex items-center justify-between">
         {/* Mobile Hamburger Menu */}
         <div className="lg:hidden">
