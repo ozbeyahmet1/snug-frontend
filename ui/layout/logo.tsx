@@ -1,4 +1,5 @@
 import { Space_Grotesk } from 'next/font/google';
+import Link from 'next/link';
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -6,5 +7,11 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export default function Logo() {
-  return <div className={`${spaceGrotesk.className} bg-black text-white font-bold w-fit text-xl px-4 py-1`}>SNUG</div>;
+  return (
+    <Link
+      href="/"
+      className={`${spaceGrotesk.className} bg-black text-white font-bold w-fit text-xl px-4 py-1 cursor-pointer`}>
+      SNUG
+    </Link>
+  );
 }

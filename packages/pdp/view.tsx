@@ -7,6 +7,7 @@ import { TiTick } from 'react-icons/ti';
 import RatingDistribution from './components/ratingDistribution';
 import ReviewCard from './components/reviewCard';
 import StarRating from './components/starRating';
+import FieldsSection from './section/fieldsSection';
 
 export default function ProductDetailPage() {
   const slides = [
@@ -21,6 +22,39 @@ export default function ProductDetailPage() {
     {
       content: 'Shop now. Pay with Stripe',
       bgColor: 'bg-green-900',
+    },
+  ];
+
+  const tabs = [
+    {
+      label: 'Description',
+      key: 'description',
+      content: (
+        <p>
+          Meet our award-winning Classic suitcases—designed by travelers, for travelers. The Carry-On is our smallest
+          suitcase, sized to fit in all overhead bins and perfect for any quick trip. It features a lightweight, durable
+          hard shell that's been rigorously tested and a signature interior compression system that helps you pack,
+          organize and protect more. Details like an easy-grip top handle, additional underside grab handle, and
+          smooth-gliding wheels make it easier than ever to maneuver and lift your suitcase. Better travel starts here.
+        </p>
+      ),
+    },
+    {
+      label: 'Materials',
+      key: 'materials',
+      content: (
+        <p>This suitcase is made with premium polycarbonate, aluminum, and recycled materials for sustainability.</p>
+      ),
+    },
+    {
+      label: 'Warranty and Return Policy',
+      key: 'warranty',
+      content: (
+        <p>
+          We offer a lifetime warranty on all our suitcases. Returns and exchanges are accepted within 30 days of
+          purchase.
+        </p>
+      ),
     },
   ];
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -47,8 +81,24 @@ export default function ProductDetailPage() {
             <p>(4.5)</p>
             <p>6487 Reviews</p>
           </div>
+          <div className="my-3 w-full h-12 bg-[#ddcdb2] flex items-center justify-center">
+            Secure your payment with Stripe
+          </div>
+          <div className="mb-3">
+            <p className="inline">Meet our award-winning Classic suitcases—designed by travelers, for travelers.</p>
+            <p className="inline ml-2 border-b-2 border-black">Read more</p>
+          </div>
+          <button className="bg-black w-full text-white h-16 flex items-center justify-center font-bold">
+            Add To Cart $245
+          </button>
         </div>
       </div>
+      <div className="bg-[#DEDDD4] pb-10">
+        <div className="container mx-auto">
+          <FieldsSection tabs={tabs} />
+        </div>
+      </div>
+
       <div className="container mx-auto py-10">
         <h1 className="font-bold text-3xl">Reviews</h1>
         <div className="flex items-center justify-between">
@@ -77,8 +127,33 @@ export default function ProductDetailPage() {
           </div>
         </div>
       </div>
+
       <div className="w-full py-10 bg-gray-200">
-        <div className="container mx-auto">
+        <div className="container mx-auto flex flex-col space-y-10">
+          <ReviewCard
+            totalStars={5}
+            rating={4.5}
+            title="Even after a year, I love my Carry-On"
+            review="The carry-on has been nothing but phenomenal. It is simple, but holds more than enough for me to store clothes for week. Mine is in blue, it doesn't really show many scuffs. However, those that do show can be easily removed, wiping them off with a cloth. With my original carry on, I had a problem with the wheels. Away was kind enough to send me replacement ones. Those, however, never glided quite as well as the originals so after being frustrated for over a year, I contacted away customer service, who set up to send me a new set of wheels. When they realize that the wheels were out of stock, they instead chose to replace the entire suitcase with a brand new one. For that, they made a customer for life as a company that stands by their brand is one that has customers that stand by their brand."
+            reviewerName="Robert J."
+            reviewDate="1 year ago"
+          />
+          <ReviewCard
+            totalStars={5}
+            rating={4.5}
+            title="Even after a year, I love my Carry-On"
+            review="The carry-on has been nothing but phenomenal. It is simple, but holds more than enough for me to store clothes for week. Mine is in blue, it doesn't really show many scuffs. However, those that do show can be easily removed, wiping them off with a cloth. With my original carry on, I had a problem with the wheels. Away was kind enough to send me replacement ones. Those, however, never glided quite as well as the originals so after being frustrated for over a year, I contacted away customer service, who set up to send me a new set of wheels. When they realize that the wheels were out of stock, they instead chose to replace the entire suitcase with a brand new one. For that, they made a customer for life as a company that stands by their brand is one that has customers that stand by their brand."
+            reviewerName="Robert J."
+            reviewDate="1 year ago"
+          />
+          <ReviewCard
+            totalStars={5}
+            rating={4.5}
+            title="Even after a year, I love my Carry-On"
+            review="The carry-on has been nothing but phenomenal. It is simple, but holds more than enough for me to store clothes for week. Mine is in blue, it doesn't really show many scuffs. However, those that do show can be easily removed, wiping them off with a cloth. With my original carry on, I had a problem with the wheels. Away was kind enough to send me replacement ones. Those, however, never glided quite as well as the originals so after being frustrated for over a year, I contacted away customer service, who set up to send me a new set of wheels. When they realize that the wheels were out of stock, they instead chose to replace the entire suitcase with a brand new one. For that, they made a customer for life as a company that stands by their brand is one that has customers that stand by their brand."
+            reviewerName="Robert J."
+            reviewDate="1 year ago"
+          />
           <ReviewCard
             totalStars={5}
             rating={4.5}
