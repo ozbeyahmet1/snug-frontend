@@ -1,9 +1,9 @@
 'use client';
 
-import CheckoutForm from '@/components/ui/checkoutButton';
-import { Progress } from '@/components/ui/progress';
-import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import CheckoutForm from '@/features/cart/components/checkoutButton';
 import { useCartStore } from '@/state/cartState';
+import { Progress } from '@/ui/libComponents/progress';
+import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/ui/libComponents/sheet';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { PropsWithChildren } from 'react';

@@ -1,5 +1,7 @@
 'use client';
 
+import { PropsWithClassName } from '@/helpers/types';
+import { cn } from '@/lib/utils';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -7,9 +9,7 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from '@/components/ui/navigation-menu';
-import { PropsWithClassName } from '@/helpers/types';
-import { cn } from '@/lib/utils';
+} from '@/ui/libComponents/navigation-menu';
 import Image from 'next/image';
 import Link from 'next/link';
 import * as React from 'react';
