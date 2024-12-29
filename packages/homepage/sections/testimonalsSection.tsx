@@ -8,7 +8,13 @@ import { JSX } from 'react';
  * @param props.author - The name of the customer providing the testimonial.
  * @returns {JSX.Element} The rendered TestimonialCard component.
  */
-function TestimonialCard({ message, author }: { message: string; author: string }): JSX.Element {
+
+export interface Testimonial {
+  message: string;
+  author: string;
+}
+
+function TestimonialCard({ message, author }: Testimonial): JSX.Element {
   return (
     <div className="flex-1 lg:px-6 rounded-md max-lg:mb-4">
       <p>{message}</p>
@@ -23,28 +29,16 @@ function TestimonialCard({ message, author }: { message: string; author: string 
  *
  * @returns {JSX.Element} The rendered TestimonialsSection component.
  */
-export default function TestimonialsSection(): JSX.Element {
-  const testimonials = [
-    {
-      message:
-        '"These pillows have transformed my sleep! The softness and support are unmatched. I wake up feeling refreshed every single day."',
-      author: 'Sarah M.',
-    },
-    {
-      message: '"I never knew how much a good pillow could change my life until I tried these. Comfort redefined!"',
-      author: 'James L.',
-    },
-    {
-      message: '"Not just a pillow, but an experience! Amazing quality and exceptional customer service."',
-      author: 'Emma R.',
-    },
-  ];
-
+export interface TestimonalsSectionProps {
+  header: string;
+  testimonials: Array<Testimonial>;
+}
+export default function TestimonialsSection({ testimonials, header }: TestimonalsSectionProps): JSX.Element {
   return (
     <section className="bg-smoke w-full text-white py-20">
       <div className="container mx-auto px-5 flex flex-col lg:flex-row lg:items-start lg:space-x-12">
         {/* Section Title */}
-        <h3 className="text-3xl font-bold flex-1 mb-8 lg:mb-0">What our happy customers are saying</h3>
+        <h3 className="text-3xl font-bold flex-1 mb-8 lg:mb-0">{header}</h3>
 
         {/* Testimonial Cards */}
         {testimonials.map((testimonial, index) => (

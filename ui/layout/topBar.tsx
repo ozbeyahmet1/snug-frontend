@@ -12,14 +12,16 @@ import { IoChevronBackOutline } from 'react-icons/io5';
  * @component
  */
 
+export interface Slide {
+  content: string;
+  bgColor: string;
+}
+
 interface TopBarProps {
   /**
    * The content to display in the slider.
    */
-  slides: {
-    content: string;
-    bgColor: string;
-  }[];
+  slides: Array<Slide>;
   currentIndex: number;
   setCurrentIndex: React.Dispatch<React.SetStateAction<number>>;
 }

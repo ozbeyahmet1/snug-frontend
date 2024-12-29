@@ -2,6 +2,7 @@
 
 import pillow from '@/assets/pillow.svg';
 import { CartDrawer } from '@/features/cart/view';
+import { uiSchema } from '@/helpers/data/uiSchema';
 import { useCartStore } from '@/state/cartState';
 import Image from 'next/image';
 import { JSX, PropsWithChildren } from 'react';
@@ -17,7 +18,8 @@ import { NavMenu } from './navMenu';
  * @param {PropsWithChildren} props - Props passed to the Header component.
  * @returns {JSX.Element} The rendered Header component.
  */
-export default function Header({}: PropsWithChildren): JSX.Element {
+
+export default function Header(): JSX.Element {
   const { cart } = useCartStore();
   return (
     <header className="w-full py-3 mt-8 fixed top-0 bg-white z-[999] shadow-md">
@@ -33,7 +35,7 @@ export default function Header({}: PropsWithChildren): JSX.Element {
         <Logo />
 
         {/* Desktop Navigation Menu */}
-        <NavMenu className="hidden lg:flex z-[99999] relative" />
+        <NavMenu className="hidden lg:flex z-[99999] relative" mobileMenuLinks={uiSchema.mobileMenuLinks} />
 
         {/* Right-side Actions */}
         <div className="flex items-center space-x-2">
