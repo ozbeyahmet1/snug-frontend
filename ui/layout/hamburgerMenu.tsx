@@ -6,7 +6,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from '@/components/ui/sheet';
+} from '@/ui/libComponents/sheet';
 import { PropsWithChildren } from 'react';
 
 export function HamburgerMenu({ children }: PropsWithChildren) {

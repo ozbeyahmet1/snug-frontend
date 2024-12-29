@@ -1,5 +1,7 @@
 'use client';
 
+import { PropsWithClassName } from '@/helpers/types';
+import { cn } from '@/helpers/utils';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -7,53 +9,21 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from '@/components/ui/navigation-menu';
-import { PropsWithClassName } from '@/helpers/types';
-import { cn } from '@/lib/utils';
+} from '@/ui/libComponents/navigation-menu';
 import Image from 'next/image';
 import Link from 'next/link';
 import * as React from 'react';
 
-interface ComponentLink {
+export interface MobileMenuLink {
   title: string;
   href: string;
   description: string;
 }
 
-const COMPONENT_LINKS: ComponentLink[] = [
-  {
-    title: 'Luxury Pillows',
-    href: '/products/luxury-pillows',
-    description: 'Experience unmatched comfort with our premium collection of luxury pillows.',
-  },
-  {
-    title: 'Orthopedic Pillows',
-    href: '/products/orthopedic-pillows',
-    description: 'Perfect support for your neck and back with our ergonomic orthopedic pillows.',
-  },
-  {
-    title: 'Decorative Pillows',
-    href: '/products/decorative-pillows',
-    description: 'Add style and personality to your home with our beautiful decorative pillows.',
-  },
-  {
-    title: 'Memory Foam Pillows',
-    href: '/products/memory-foam-pillows',
-    description: 'Enjoy superior comfort with our adaptive memory foam pillows.',
-  },
-  {
-    title: 'Cooling Pillows',
-    href: '/products/cooling-pillows',
-    description: 'Stay cool all night with our advanced cooling pillow technology.',
-  },
-  {
-    title: 'Travel Pillows',
-    href: '/products/travel-pillows',
-    description: 'Compact and convenient pillows for ultimate comfort on the go.',
-  },
-];
-
-export function NavMenu({ className }: PropsWithClassName): React.JSX.Element {
+export function NavMenu({
+  className,
+  mobileMenuLinks,
+}: PropsWithClassName<{ mobileMenuLinks: Array<MobileMenuLink> }>): React.JSX.Element {
   return (
     <NavigationMenu className={className}>
       <NavigationMenuList>
@@ -99,9 +69,9 @@ export function NavMenu({ className }: PropsWithClassName): React.JSX.Element {
           <NavigationMenuTrigger className="text-sm font-semibold">PILLOWS</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-              {COMPONENT_LINKS.map((component) => (
-                <ListItem key={component.title} title={component.title} href={component.href}>
-                  {component.description}
+              {mobileMenuLinks.map((mobileMenuLink) => (
+                <ListItem key={mobileMenuLink.title} title={mobileMenuLink.title} href={mobileMenuLink.href}>
+                  {mobileMenuLink.description}
                 </ListItem>
               ))}
             </ul>

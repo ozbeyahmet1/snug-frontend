@@ -1,4 +1,4 @@
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/ui/libComponents/tooltip';
 import React from 'react';
 
 /**
@@ -30,7 +30,7 @@ const RatingDistribution: React.FC<RatingDistributionProps> = ({ ratings }) => {
               <Tooltip delayDuration={0}>
                 <TooltipTrigger asChild>
                   <div
-                    className="relative bg-black group-hover:bg-blue-500 h-6 cursor-pointer"
+                    className="relative bg-smoke group-hover:bg-blue-500 h-6 cursor-pointer"
                     style={{ width: `${percentage}%` }}
                     aria-label={`Rating ${rating} bar`}></div>
                 </TooltipTrigger>

@@ -1,5 +1,6 @@
 'use client';
 
+import { uiSchema } from '@/helpers/data/uiSchema';
 import { useProducts } from '@/helpers/hooks/useFetchProducts';
 import TopBar from '@/ui/layout/topBar';
 import { useState } from 'react';
@@ -11,31 +12,17 @@ import HeroSection from './sections/heroSection';
 import TestimonalsSection from './sections/testimonalsSection';
 
 export default function HomepageView() {
-  const slides = [
-    {
-      content: 'Send the gift that everyone will love',
-      bgColor: 'bg-red-700',
-    },
-    {
-      content: 'New styles added: Save up to 50% off on select gifts',
-      bgColor: 'bg-blue-700',
-    },
-    {
-      content: 'Shop now. Pay with Stripe',
-      bgColor: 'bg-green-900',
-    },
-  ];
   const { products, isLoading, error, refetch } = useProducts();
   const [currentIndex, setCurrentIndex] = useState(0);
 
   return (
     <div>
-      <TopBar slides={slides} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} />
-      <HeroSection boxColor={slides[currentIndex].bgColor} />
-      <FavoritesSection favoriteItems={products?.slice(0, 4) as Array<Product>} />
-      <TestimonalsSection />
-      <BannerSection />
-      <DiscountBanner />
+      <TopBar slides={uiSchema.topBar} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} />
+      <HeroSection boxColor={uiSchema.topBar[currentIndex].bgColor} heroSectionContents={uiSchema.heroSection} />
+      <FavoritesSection favoriteItems={products?.slice(0, 4) as Array<Product>} {...uiSchema.favoritesSection} />
+      <TestimonalsSection {...uiSchema.testimonialSection} />
+      <BannerSection {...uiSchema.bannerSection} />
+      <DiscountBanner {...uiSchema.discountSection} />
     </div>
   );
 }

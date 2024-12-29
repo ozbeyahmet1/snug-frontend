@@ -13,8 +13,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: 'var(--background)',
-        foreground: 'var(--foreground)',
+        beige: '#DEDDD4',
+        smoke: '#111111',
       },
     },
   },

@@ -1,5 +1,9 @@
+'use client';
+
 import pillow from '@/assets/pillow.svg';
 import { CartDrawer } from '@/features/cart/view';
+import { uiSchema } from '@/helpers/data/uiSchema';
+import { useCartStore } from '@/state/cartState';
 import Image from 'next/image';
 import { JSX, PropsWithChildren } from 'react';
 import { IoMenuOutline, IoSearchOutline } from 'react-icons/io5';
@@ -14,7 +18,9 @@ import { NavMenu } from './navMenu';
  * @param {PropsWithChildren} props - Props passed to the Header component.
  * @returns {JSX.Element} The rendered Header component.
  */
-export default function Header({}: PropsWithChildren): JSX.Element {
+
+export default function Header(): JSX.Element {
+  const { cart } = useCartStore();
   return (
     <header className="w-full py-3 mt-8 fixed top-0 bg-white z-[999] shadow-md">
       <div className="max-sm:px-5 container mx-auto flex items-center justify-between">
@@ -29,7 +35,7 @@ export default function Header({}: PropsWithChildren): JSX.Element {
         <Logo />
 
         {/* Desktop Navigation Menu */}
-        <NavMenu className="hidden lg:flex z-[99999] relative" />
+        <NavMenu className="hidden lg:flex z-[99999] relative" mobileMenuLinks={uiSchema.mobileMenuLinks} />
 
         {/* Right-side Actions */}
         <div className="flex items-center space-x-2">
@@ -45,7 +51,9 @@ export default function Header({}: PropsWithChildren): JSX.Element {
               <div className="flex items-center relative cursor-pointer">
                 <Image src={pillow} alt="Pillow" width={28} height={28} />
                 {/* Cart Count Indicator */}
-                <p className="-ml-[23px] -mt-1 text-[10px] size-5 rounded-full text-center p-1 font-bold">11</p>
+                <p className="-ml-[23px] -mt-1 text-[10px] size-5 rounded-full text-center p-1 font-bold">
+                  {cart.length}
+                </p>
               </div>
             }
           />

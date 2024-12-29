@@ -1,8 +1,12 @@
 'use client';
 
-import { Progress } from '@/components/ui/progress';
-import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { PropsWithChildren, useState } from 'react';
+import CheckoutForm from '@/features/cart/components/checkoutButton';
+import { useCartStore } from '@/state/cartState';
+import { Progress } from '@/ui/libComponents/progress';
+import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/ui/libComponents/sheet';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import { PropsWithChildren } from 'react';
 import { IoClose, IoGiftOutline } from 'react-icons/io5';
 import { LiaShippingFastSolid } from 'react-icons/lia';
 
@@ -29,32 +33,10 @@ function CartIcons() {
     </div>
   );
 }
-
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY || '');
 export function CartDrawer({ children }: PropsWithChildren) {
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      image:
-        'https://uk.bimago.media/media/catalog/image/view/product/60821/role/image/size/1500x2240/type/ft-osmr-wiz2/e31e50018a2a25bf14ba5f3f0692d804.webp',
-      name: '100% Grass-fed Beef Bone Broth',
-      price: 46.94,
-      quantity: 1,
-    },
-  ]);
-
-  const handleIncrease = (id: number) => {
-    setCartItems((items) => items.map((item) => (item.id === id ? { ...item, quantity: item.quantity + 1 } : item)));
-  };
-
-  const handleDecrease = (id: number) => {
-    setCartItems((items) =>
-      items.map((item) => (item.id === id && item.quantity > 1 ? { ...item, quantity: item.quantity - 1 } : item)),
-    );
-  };
-
-  const handleRemove = (id: number) => {
-    setCartItems((items) => items.filter((item) => item.id !== id));
-  };
+  const { cart, increase, decrease, removeFromCart } = useCartStore();
+  const cartTotal = cart.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
   return (
     <Sheet modal={true}>
       <SheetTrigger asChild>{children}</SheetTrigger>
@@ -75,16 +57,16 @@ export function CartDrawer({ children }: PropsWithChildren) {
         </div>
 
         <div className="flex flex-col py-5 px-3">
-          {cartItems.map((item) => (
+          {cart.map((item, i) => (
             <CartItem
-              key={item.id}
-              image={item.image}
-              name={item.name}
-              price={item.price}
+              key={i}
+              image={item.product.image}
+              name={item.product.title}
+              price={item.product.price}
               quantity={item.quantity}
-              onIncrease={() => handleIncrease(item.id)}
-              onDecrease={() => handleDecrease(item.id)}
-              onRemove={() => handleRemove(item.id)}
+              onIncrease={() => increase(item.product.href)}
+              onDecrease={() => decrease(item.product.href)}
+              onRemove={() => removeFromCart(item.product.href)}
             />
           ))}
         </div>
@@ -92,9 +74,11 @@ export function CartDrawer({ children }: PropsWithChildren) {
           <div className=" border-y-[1px] p-3 flex items-center justify-between">
             <div className="flex items-center space-x-1">
               <p>Subtotal:</p>
-              <p className="font-bold">$47.94</p>
+              <p className="font-bold">${cartTotal}</p>
             </div>
-            <button className="bg-red-500 p-2 rounded-[4px] text-white font-bold">Checkout</button>
+            <Elements stripe={stripePromise}>
+              <CheckoutForm products={cart} />
+            </Elements>
           </div>
         </div>
         <SheetClose className="absolute left-5 top-3">
