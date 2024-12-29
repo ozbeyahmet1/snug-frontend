@@ -1,5 +1,6 @@
 'use client';
 
+import { useProducts } from '@/helpers/hooks/useFetchProducts';
 import TopBar from '@/ui/layout/topBar';
 import { useState } from 'react';
 
@@ -24,12 +25,14 @@ export default function HomepageView() {
       bgColor: 'bg-green-900',
     },
   ];
+  const { products, isLoading, error, refetch } = useProducts();
   const [currentIndex, setCurrentIndex] = useState(0);
+
   return (
     <div>
       <TopBar slides={slides} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} />
       <HeroSection boxColor={slides[currentIndex].bgColor} />
-      <FavoritesSection />
+      <FavoritesSection favoriteItems={products?.slice(0, 4) as Array<Product>} />
       <TestimonalsSection />
       <BannerSection />
       <DiscountBanner />

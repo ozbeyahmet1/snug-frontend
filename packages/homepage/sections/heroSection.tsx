@@ -28,7 +28,7 @@ interface HeroSectionProps {
  */
 export default function HeroSection({ boxColor }: HeroSectionProps): JSX.Element {
   return (
-    <section className="flex flex-col lg:flex-row h-auto items-stretch">
+    <section className="flex flex-col lg:flex-row h-auto items-stretch mt-3">
       {/* Left Grid Section */}
       <LeftGrid boxColor={boxColor} />
 

@@ -10,27 +10,15 @@ import Link from 'next/link';
  * @param props.imageSrc - The URL of the image source.
  * @param props.bgOpacity - The background opacity for the card.
  */
-export function FavoriteCard({
-  title,
-  price,
-  imageSrc,
-  bgOpacity,
-  href,
-}: {
-  title: string;
-  price: string;
-  imageSrc: string;
-  bgOpacity: number;
-  href?: string;
-}) {
+export function FavoriteCard({ title, price, image, href, bgOpacity }: Product & { bgOpacity: string }) {
   return (
     <Link className="flex-1 flex flex-col group cursor-pointer" href={`/product/${href}`}>
-      <div className={`bg-[#DEDDD4] h-80 lg:h-96 flex items-center justify-center bg-opacity-${bgOpacity}`}>
+      <div className={`bg-[#DEDDD4] h-80 lg:h-96 flex items-center justify-center p-4 ${bgOpacity}`}>
         <Image
           height={250}
           width={250}
           alt={title}
-          src={imageSrc}
+          src={image}
           className="transition-transform duration-300 group-hover:scale-110"
         />
       </div>

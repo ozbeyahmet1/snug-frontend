@@ -1,6 +1,8 @@
 'use client';
 
+import { useFetchSingleProduct } from '@/helpers/hooks/useFetchSingleProduct';
 import TopBar from '@/ui/layout/topBar';
+import { useParams } from 'next/navigation';
 import { useState } from 'react';
 import { TiTick } from 'react-icons/ti';
 
@@ -25,56 +27,42 @@ export default function ProductDetailPage() {
     },
   ];
 
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const params = useParams();
+  const { url } = params;
+
+  const { product, isLoading, error, refetch } = useFetchSingleProduct(url as string);
+  console.log(product);
   const tabs = [
     {
       label: 'Description',
       key: 'description',
-      content: (
-        <p>
-          Meet our award-winning Classic suitcases—designed by travelers, for travelers. The Carry-On is our smallest
-          suitcase, sized to fit in all overhead bins and perfect for any quick trip. It features a lightweight, durable
-          hard shell that's been rigorously tested and a signature interior compression system that helps you pack,
-          organize and protect more. Details like an easy-grip top handle, additional underside grab handle, and
-          smooth-gliding wheels make it easier than ever to maneuver and lift your suitcase. Better travel starts here.
-        </p>
-      ),
+      content: <p>{product?.description}</p>,
     },
     {
       label: 'Materials',
       key: 'materials',
-      content: (
-        <p>This suitcase is made with premium polycarbonate, aluminum, and recycled materials for sustainability.</p>
-      ),
+      content: <p>{product?.materials}</p>,
     },
     {
       label: 'Warranty and Return Policy',
       key: 'warranty',
-      content: (
-        <p>
-          We offer a lifetime warranty on all our suitcases. Returns and exchanges are accepted within 30 days of
-          purchase.
-        </p>
-      ),
+      content: <p>{product?.warrantyAndReturnPolicy}</p>,
     },
   ];
-  const [currentIndex, setCurrentIndex] = useState(0);
-
   return (
     <div className="pt-3">
       <TopBar slides={slides} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} />
       <div className="h-[600px] flex items-center bg-[#DEDDD4]">
-        <div className="w-1/2  h-full">
-          <img
-            src="https://assets.awaytravel.com/spree/products/46196/original/f6c463ce-29d6-446d-8cfd-652b65f97e24.jpg?format=webp&quality=75&width=640"
-            alt=""
-            className="w-full h-full object-cover"
-          />
+        <div className="w-1/2  h-full py-10 px-20">
+          <img src={product?.image} alt="" className="w-full h-full aspect-square" />
         </div>
         <div className="w-1/2 h-full py-20 px-10">
           <p>Luggage / Carry-On Luggage</p>
           <div className="flex items-center justify-between py-6 text-3xl">
-            <h1 className="font-bold">The Bigger Carry-On</h1>
-            <p>$245</p>
+            <h1 className="font-bold">{product?.title}</h1>
+            <p>${product?.price}</p>
           </div>
           <div className="flex items-center space-x-2">
             <StarRating totalStars={5} rating={4.5} />
@@ -130,38 +118,19 @@ export default function ProductDetailPage() {
 
       <div className="w-full py-10 bg-gray-200">
         <div className="container mx-auto flex flex-col space-y-10">
-          <ReviewCard
-            totalStars={5}
-            rating={4.5}
-            title="Even after a year, I love my Carry-On"
-            review="The carry-on has been nothing but phenomenal. It is simple, but holds more than enough for me to store clothes for week. Mine is in blue, it doesn't really show many scuffs. However, those that do show can be easily removed, wiping them off with a cloth. With my original carry on, I had a problem with the wheels. Away was kind enough to send me replacement ones. Those, however, never glided quite as well as the originals so after being frustrated for over a year, I contacted away customer service, who set up to send me a new set of wheels. When they realize that the wheels were out of stock, they instead chose to replace the entire suitcase with a brand new one. For that, they made a customer for life as a company that stands by their brand is one that has customers that stand by their brand."
-            reviewerName="Robert J."
-            reviewDate="1 year ago"
-          />
-          <ReviewCard
-            totalStars={5}
-            rating={4.5}
-            title="Even after a year, I love my Carry-On"
-            review="The carry-on has been nothing but phenomenal. It is simple, but holds more than enough for me to store clothes for week. Mine is in blue, it doesn't really show many scuffs. However, those that do show can be easily removed, wiping them off with a cloth. With my original carry on, I had a problem with the wheels. Away was kind enough to send me replacement ones. Those, however, never glided quite as well as the originals so after being frustrated for over a year, I contacted away customer service, who set up to send me a new set of wheels. When they realize that the wheels were out of stock, they instead chose to replace the entire suitcase with a brand new one. For that, they made a customer for life as a company that stands by their brand is one that has customers that stand by their brand."
-            reviewerName="Robert J."
-            reviewDate="1 year ago"
-          />
-          <ReviewCard
-            totalStars={5}
-            rating={4.5}
-            title="Even after a year, I love my Carry-On"
-            review="The carry-on has been nothing but phenomenal. It is simple, but holds more than enough for me to store clothes for week. Mine is in blue, it doesn't really show many scuffs. However, those that do show can be easily removed, wiping them off with a cloth. With my original carry on, I had a problem with the wheels. Away was kind enough to send me replacement ones. Those, however, never glided quite as well as the originals so after being frustrated for over a year, I contacted away customer service, who set up to send me a new set of wheels. When they realize that the wheels were out of stock, they instead chose to replace the entire suitcase with a brand new one. For that, they made a customer for life as a company that stands by their brand is one that has customers that stand by their brand."
-            reviewerName="Robert J."
-            reviewDate="1 year ago"
-          />
-          <ReviewCard
-            totalStars={5}
-            rating={4.5}
-            title="Even after a year, I love my Carry-On"
-            review="The carry-on has been nothing but phenomenal. It is simple, but holds more than enough for me to store clothes for week. Mine is in blue, it doesn't really show many scuffs. However, those that do show can be easily removed, wiping them off with a cloth. With my original carry on, I had a problem with the wheels. Away was kind enough to send me replacement ones. Those, however, never glided quite as well as the originals so after being frustrated for over a year, I contacted away customer service, who set up to send me a new set of wheels. When they realize that the wheels were out of stock, they instead chose to replace the entire suitcase with a brand new one. For that, they made a customer for life as a company that stands by their brand is one that has customers that stand by their brand."
-            reviewerName="Robert J."
-            reviewDate="1 year ago"
-          />
+          {product?.reviews.map((review, i) => {
+            return (
+              <ReviewCard
+                totalStars={review.rating}
+                rating={4.5}
+                title={review.summary}
+                review={review.review}
+                reviewerName={review.reviewer}
+                reviewDate={new Date(review.timestamp).toDateString()}
+                key={i}
+              />
+            );
+          })}
         </div>
       </div>
     </div>
