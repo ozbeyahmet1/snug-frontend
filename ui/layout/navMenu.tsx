@@ -1,7 +1,7 @@
 'use client';
 
 import { PropsWithClassName } from '@/helpers/types';
-import { cn } from '@/lib/utils';
+import { cn } from '@/helpers/utils';
 import {
   NavigationMenu,
   NavigationMenuContent,
