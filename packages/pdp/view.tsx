@@ -1,6 +1,7 @@
 'use client';
 
 import { useFetchSingleProduct } from '@/helpers/hooks/useFetchSingleProduct';
+import { useCartStore } from '@/state/cartState';
 import TopBar from '@/ui/layout/topBar';
 import { useParams } from 'next/navigation';
 import { useState } from 'react';
@@ -33,7 +34,7 @@ export default function ProductDetailPage() {
   const { url } = params;
 
   const { product, isLoading, error, refetch } = useFetchSingleProduct(url as string);
-  console.log(product);
+
   const tabs = [
     {
       label: 'Description',
@@ -51,10 +52,14 @@ export default function ProductDetailPage() {
       content: <p>{product?.warrantyAndReturnPolicy}</p>,
     },
   ];
+
+  const addToCart = useCartStore((state) => state.addToCart);
+  const { cart, increase, decrease, removeFromCart } = useCartStore();
+
   return (
     <div className="pt-3">
       <TopBar slides={slides} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} />
-      <div className="h-[600px] flex items-center bg-[#DEDDD4]">
+      <div className="h-[600px] flex items-center bg-beige">
         <div className="w-1/2  h-full py-10 px-20">
           <img src={product?.image} alt="" className="w-full h-full aspect-square" />
         </div>
@@ -76,12 +81,14 @@ export default function ProductDetailPage() {
             <p className="inline">Meet our award-winning Classic suitcases—designed by travelers, for travelers.</p>
             <p className="inline ml-2 border-b-2 border-black">Read more</p>
           </div>
-          <button className="bg-black w-full text-white h-16 flex items-center justify-center font-bold">
+          <button
+            onClick={() => addToCart(product as Product)}
+            className="bg-black w-full text-white h-16 flex items-center justify-center font-bold">
             Add To Cart $245
           </button>
         </div>
       </div>
-      <div className="bg-[#DEDDD4] pb-10">
+      <div className="bg-beige pb-10">
         <div className="container mx-auto">
           <FieldsSection tabs={tabs} />
         </div>
