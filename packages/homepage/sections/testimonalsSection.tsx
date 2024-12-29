@@ -41,7 +41,7 @@ export default function TestimonialsSection(): JSX.Element {
   ];
 
   return (
-    <section className="bg-[#111111] w-full text-white py-20">
+    <section className="bg-smoke w-full text-white py-20">
       <div className="container mx-auto px-5 flex flex-col lg:flex-row lg:items-start lg:space-x-12">
         {/* Section Title */}
         <h3 className="text-3xl font-bold flex-1 mb-8 lg:mb-0">What our happy customers are saying</h3>

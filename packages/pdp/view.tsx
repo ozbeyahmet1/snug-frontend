@@ -83,7 +83,7 @@ export default function ProductDetailPage() {
           </div>
           <button
             onClick={() => addToCart(product as Product)}
-            className="bg-black w-full text-white h-16 flex items-center justify-center font-bold">
+            className="bg-smoke w-full text-white h-16 flex items-center justify-center font-bold">
             Add To Cart $245
           </button>
         </div>
@@ -114,7 +114,7 @@ export default function ProductDetailPage() {
             />
           </div>
           <div className="flex flex-col items-center">
-            <span className="flex bg-black items-center space-x-2 px-2 py-1 text-sm rounded">
+            <span className="flex bg-smoke items-center space-x-2 px-2 py-1 text-sm rounded">
               <TiTick fill="white" className="border-solid border rounded-full" />
               <p className="text-white">94%</p>
             </span>

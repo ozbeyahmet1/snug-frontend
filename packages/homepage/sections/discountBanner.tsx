@@ -16,14 +16,14 @@ const playball = Playball({
  */
 export default function DiscountBanner(): JSX.Element {
   return (
-    <div className="bg-[#111111] w-full py-10 flex flex-col items-center">
+    <div className="bg-smoke w-full py-10 flex flex-col items-center">
       {/* Promotional message styled with Playball font */}
       <p className={`mb-5 text-xl lg:text-3xl text-white text-center ${playball.className}`}>
         Save up to 50% off and snag end of season styles
       </p>
 
       {/* Call-to-action button with hover effects */}
-      <button className="uppercase bg-white text-black px-5 py-3 sm:px-7 sm:py-4 font-semibold hover:bg-[#111111] hover:text-white duration-300 cursor-pointer">
+      <button className="uppercase bg-white text-black px-5 py-3 sm:px-7 sm:py-4 font-semibold hover:bg-smoke hover:text-white duration-300 cursor-pointer">
         Shop Now
       </button>
     </div>

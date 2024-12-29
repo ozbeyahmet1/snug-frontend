@@ -40,12 +40,12 @@ function Newsletter(): JSX.Element {
       <div className="flex items-center cursor-pointer mt-4">
         <input
           type="text"
-          className="h-12 w-full border-black border placeholder:p-2 bg-[#DEDDD4]"
+          className="h-12 w-full border-black border placeholder:p-2 bg-beige"
           placeholder="Email address"
         />
         <button
           type="button"
-          className="h-12 w-12 bg-black flex items-center justify-center hover:bg-gray-700 transition-colors">
+          className="h-12 w-12 bg-smoke flex items-center justify-center hover:bg-gray-700 transition-colors">
           <IoIosArrowRoundForward color="white" size={28} />
         </button>
       </div>
@@ -83,7 +83,7 @@ export default function Footer(): JSX.Element {
   ];
 
   return (
-    <footer className="bg-[#DEDDD4] w-full py-10">
+    <footer className="bg-beige w-full py-10">
       <div className="container mx-auto px-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
         {sections.map((section, index) => (
           <FooterLinks key={index} title={section.title} links={section.links} />

@@ -49,7 +49,7 @@ function ImageSection(): JSX.Element {
  */
 function ContentSection(): JSX.Element {
   return (
-    <div className="lg:aspect-square flex-1 flex items-start justify-center flex-col bg-[#DEDDD4]">
+    <div className="lg:aspect-square flex-1 flex items-start justify-center flex-col bg-beige">
       <div className="p-10">
         {/* Headline */}
         <h1 className="text-3xl leading-10 lg:text-[50px] lg:leading-[50px] mb-4">
