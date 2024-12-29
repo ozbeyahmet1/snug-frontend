@@ -1,8 +1,11 @@
 'use client';
 
+import CheckoutForm from '@/components/ui/checkoutButton';
 import { Progress } from '@/components/ui/progress';
 import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { useCartStore } from '@/state/cartState';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 import { PropsWithChildren } from 'react';
 import { IoClose, IoGiftOutline } from 'react-icons/io5';
 import { LiaShippingFastSolid } from 'react-icons/lia';
@@ -30,7 +33,7 @@ function CartIcons() {
     </div>
   );
 }
-
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY || '');
 export function CartDrawer({ children }: PropsWithChildren) {
   const { cart, increase, decrease, removeFromCart } = useCartStore();
   const cartTotal = cart.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
@@ -73,7 +76,9 @@ export function CartDrawer({ children }: PropsWithChildren) {
               <p>Subtotal:</p>
               <p className="font-bold">${cartTotal}</p>
             </div>
-            <button className="bg-red-500 p-2 rounded-[4px] text-white font-bold">Checkout</button>
+            <Elements stripe={stripePromise}>
+              <CheckoutForm products={cart} />
+            </Elements>
           </div>
         </div>
         <SheetClose className="absolute left-5 top-3">

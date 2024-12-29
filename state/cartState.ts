@@ -16,6 +16,7 @@ interface Review {
  * Interface representing a product that can be added to the cart.
  */
 interface Product {
+  id?: number;
   title: string;
   price: number;
   image: string;
@@ -29,7 +30,7 @@ interface Product {
 /**
  * Interface representing an item in the shopping cart.
  */
-interface CartItem {
+export interface CartItem {
   product: Product;
   quantity: number;
 }
