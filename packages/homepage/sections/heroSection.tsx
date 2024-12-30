@@ -59,7 +59,7 @@ export default function HeroSection({
       {/* Right Content Section */}
       <div className="bg-smoke flex items-center justify-center flex-1 flex-col text-center p-5 lg:p-10">
         <h1 className={`text-white text-[40px] sm:text-[50px] lg:text-[60px] ${greatVibes.className}`}>{text}</h1>
-        <p className="text-white text-[50px] sm:text-[60px] lg:text-[80px] uppercase">{slogan}</p>
+        <p className="text-white text-[50px] sm:text-[60px] xl:text-[80px] uppercase">{slogan}</p>
         <button className="uppercase bg-white text-black px-5 py-3 sm:px-7 sm:py-4 font-semibold hover:bg-smoke hover:text-white duration-300 cursor-pointer">
           {buttonText}
         </button>
