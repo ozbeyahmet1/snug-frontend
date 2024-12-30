@@ -43,6 +43,32 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       quantity: product.quantity,
     }));
 
+    const cartTotal = lineItems.reduce((sum, item) => sum + item.price_data.unit_amount * item.quantity, 0) / 100;
+    // Check if cartTotal exceeds 500
+    let discounts: { promotion_code: string }[] = [];
+    if (cartTotal > 500) {
+      // Create coupon
+      const coupon = await stripe.coupons.create({
+        percent_off: 10,
+        duration: 'once',
+      });
+
+      // Create promotion code
+      const uniqueCode = `BIGSPENDER10-${Date.now()}`;
+
+      const promotionCode = await stripe.promotionCodes.create({
+        coupon: coupon.id,
+        code: uniqueCode,
+      });
+
+      // Add promotion code to discounts
+      discounts = [
+        {
+          promotion_code: promotionCode.id, // Use the ID of the created promotion code
+        },
+      ];
+    }
+
     // Create a Stripe Checkout Session
     const sessionStripe = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -50,7 +76,8 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       mode: 'payment',
       success_url: `${req.headers.get('origin')}/success`,
       cancel_url: `${req.headers.get('origin')}/cancel`,
-      metadata: { user_id: userId }, // Attach user ID to metadata
+      metadata: { user_id: userId },
+      discounts,
     });
 
     return NextResponse.json({ url: sessionStripe.url });

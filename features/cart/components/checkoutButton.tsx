@@ -10,6 +10,7 @@ import React from 'react';
  */
 interface CheckoutButtonProps {
   products: CartItem[];
+  background: string;
 }
 
 /**
@@ -18,7 +19,7 @@ interface CheckoutButtonProps {
  * @param {CheckoutButtonProps} props - Props containing cart products.
  * @returns {React.FC} - A button component for initiating checkout.
  */
-const CheckoutButton: React.FC<CheckoutButtonProps> = ({ products }) => {
+const CheckoutButton: React.FC<CheckoutButtonProps> = ({ products, background }) => {
   /**
    * Initiates the checkout process by creating a checkout session and redirecting to Stripe Checkout.
    *
@@ -53,7 +54,7 @@ const CheckoutButton: React.FC<CheckoutButtonProps> = ({ products }) => {
 
   return (
     <button
-      className="p-2 font-bold text-white bg-red-500 rounded-[4px]"
+      className={`p-2 font-bold text-white ${background} rounded-[4px] duration-300`}
       type="button"
       onClick={() => {
         // eslint-disable-next-line no-void
