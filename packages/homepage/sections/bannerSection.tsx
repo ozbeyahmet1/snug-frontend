@@ -23,7 +23,7 @@ export default function BannerSection({ image, header, subheader, buttonText, hr
     <div className="w-full flex flex-col lg:flex-row mt-20">
       {/* Image Section */}
       <div className="aspect-square flex-1 h-full">
-        <img src={image} alt="Promotional" className="h-full" />
+        <img src={image} alt="Promotional" className="h-full animate-fadeIn" />
       </div>
 
       {/* Content Section */}

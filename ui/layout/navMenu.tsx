@@ -80,7 +80,7 @@ export function NavMenu({
 
         {/* "Sale" Section */}
         <NavigationMenuItem>
-          <Link href="/sale" legacyBehavior passHref>
+          <Link href="/collections/sale" legacyBehavior passHref>
             <NavigationMenuLink className="text-sm font-semibold text-red-500">SALE</NavigationMenuLink>
           </Link>
         </NavigationMenuItem>

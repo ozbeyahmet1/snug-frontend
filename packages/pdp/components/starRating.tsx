@@ -27,12 +27,7 @@ interface StarRatingProps {
  */
 const StarRating: React.FC<StarRatingProps> = ({ totalStars = 5, rating }) => {
   return (
-    <div
-      style={{
-        display: 'flex',
-        gap: '4px',
-        position: 'relative',
-      }}>
+    <div className="flex space-x-[4px] relative animate-fadeIn">
       {[...Array(totalStars)].map((_, index) => {
         // Calculate the fill percentage for each star
         const fillPercentage = Math.min(1, Math.max(0, rating - index)) * 100;

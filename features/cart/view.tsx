@@ -21,12 +21,8 @@ function CartIcons() {
       <div className="flex-1 flex items-end justify-end text-xs text-center">
         <LiaShippingFastSolid size={20} />
       </div>
-      <div className="flex-1 flex items-end justify-end">
-        <IoGiftOutline />
-      </div>
-      <div className="flex-1 flex items-end justify-end">
-        <IoGiftOutline />
-      </div>
+      <div className="flex-1 flex items-end justify-end"></div>
+      <div className="flex-1 flex items-end justify-end"></div>
       <div className="flex-1 flex items-end justify-end">
         <IoGiftOutline />
       </div>
@@ -40,7 +36,7 @@ export function CartDrawer({ children }: PropsWithChildren) {
   return (
     <Sheet modal={true}>
       <SheetTrigger asChild>{children}</SheetTrigger>
-      <SheetContent className="z-[9999] focus:outline-none p-0">
+      <SheetContent className="z-[9999] focus:outline-none p-0 max-sm:w-[90%]">
         <SheetHeader>
           <SheetTitle className="hidden"></SheetTitle>
         </SheetHeader>

@@ -19,11 +19,11 @@ export function FavoriteCard({ title, price, image, href, bgOpacity }: Product &
           width={250}
           alt={title}
           src={image}
-          className="transition-transform duration-300 group-hover:scale-110"
+          className="transition-transform duration-300 group-hover:scale-110 animate-fadeIn"
         />
       </div>
       <h3 className="mt-3 text-lg">{title}</h3>
-      <p className="font-bold">{price}</p>
+      <p className="font-bold">${price}</p>
     </Link>
   );
 }
