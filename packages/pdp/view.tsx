@@ -86,7 +86,7 @@ export default function ProductDetailPage() {
       {/* Product Section */}
       <div className="flex flex-col lg:flex-row items-center bg-beige">
         <div className="w-full lg:w-1/2 h-full py-10 px-4 lg:px-20">
-          <div className="h-[300px] w-[300px] md:h-[400px] md:w-[400px] lg:h-[600px] lg:w-[600px] mx-auto">
+          <div className="h-[300px] w-[300px] md:h-[400px] md:w-[400px] xl:h-[600px] xl:w-[600px] mx-auto">
             {!isLoading && product && (
               <Image
                 src={product.image}
@@ -112,28 +112,30 @@ export default function ProductDetailPage() {
               <Skeleton className="h-8 w-32 rounded-full" />
             )}
           </div>
-          <div className="flex items-center space-x-2">
-            {!isLoading ? (
-              <StarRating totalStars={5} rating={averageRating} />
-            ) : (
-              <Skeleton className="h-8 w-32 rounded-full" />
-            )}
-            {!isLoading ? (
-              <p className="animate-fadeIn">({averageRating.toFixed(2)})</p>
-            ) : (
-              <Skeleton className="h-8 w-8 rounded-full" />
-            )}
-            {!isLoading ? (
-              <p className="animate-fadeIn">{product?.reviews.length} Reviews</p>
-            ) : (
-              <Skeleton className="h-8 w-32 rounded-full" />
-            )}
-          </div>
+          {(product?.reviews.length as number) > 0 && (
+            <div className="flex items-center space-x-2">
+              {!isLoading ? (
+                <StarRating totalStars={5} rating={averageRating} />
+              ) : (
+                <Skeleton className="h-8 w-32 rounded-full" />
+              )}
+              {!isLoading ? (
+                <p className="animate-fadeIn">({averageRating.toFixed(2)})</p>
+              ) : (
+                <Skeleton className="h-8 w-8 rounded-full" />
+              )}
+              {!isLoading ? (
+                <p className="animate-fadeIn">{product?.reviews.length} Reviews</p>
+              ) : (
+                <Skeleton className="h-8 w-32 rounded-full" />
+              )}
+            </div>
+          )}
           <div className="my-3 w-full h-12 bg-[#ddcdb2] flex items-center justify-center text-center">
             Secure your payment with Stripe
           </div>
           {!isLoading ? (
-            <div className="mb-7 h-20 lg:h-12 animate-fadeIn">
+            <div className="mb-7 h-20 xl:h-12 animate-fadeIn">
               <p className="inline">{product?.description}</p>
               <p className="inline ml-2 border-b-2 border-black cursor-pointer" onClick={handleScrollToFields}>
                 Read more
@@ -163,34 +165,37 @@ export default function ProductDetailPage() {
       </div>
 
       {/* Reviews Section */}
-      <div className="container mx-auto px-4 py-10">
-        <h1 className="font-bold text-xl lg:text-3xl">Reviews</h1>
-        <div className="flex flex-col lg:flex-row items-start justify-between space-y-4 lg:space-y-0">
-          <div className="flex flex-col lg:flex-row items-center space-y-2 lg:space-y-0 lg:items-start lg:space-x-20">
-            <div className="flex flex-col items-center">
-              <p className="text-2xl mb-2">{averageRating.toFixed(2)}</p>
-              <StarRating totalStars={5} rating={averageRating} />
-              <p className="mt-2">{product?.reviews.length} Reviews</p>
+      {!product?.reviews && (
+        <div className="container mx-auto px-4 py-10">
+          <h1 className="font-bold text-xl lg:text-3xl">Reviews</h1>
+          <div className="flex flex-col lg:flex-row items-start justify-between space-y-4 lg:space-y-0">
+            <div className="flex flex-col lg:flex-row items-center space-y-2 lg:space-y-0 lg:items-start lg:space-x-20">
+              <div className="flex flex-col items-center">
+                <p className="text-2xl mb-2">{averageRating.toFixed(2)}</p>
+                <StarRating totalStars={5} rating={averageRating} />
+                <p className="mt-2">{product?.reviews.length} Reviews</p>
+              </div>
+
+              <RatingDistribution
+                ratings={[
+                  { rating: 5, percentage: 84 },
+                  { rating: 4, percentage: 14 },
+                  { rating: 3, percentage: 6 },
+                  { rating: 2, percentage: 4 },
+                  { rating: 1, percentage: 4 },
+                ]}
+              />
             </div>
-            <RatingDistribution
-              ratings={[
-                { rating: 5, percentage: 84 },
-                { rating: 4, percentage: 14 },
-                { rating: 3, percentage: 6 },
-                { rating: 2, percentage: 4 },
-                { rating: 1, percentage: 4 },
-              ]}
-            />
-          </div>
-          <div className="flex flex-col items-center text-center lg:text-left">
-            <span className="flex bg-smoke items-center space-x-2 px-2 py-1 text-sm rounded">
-              <TiTick fill="white" className="border-solid border rounded-full" />
-              <p className="text-white">{(averageRating * 20).toFixed(0)}%</p>
-            </span>
-            <p className="text-sm mb-2 w-full lg:w-48">of respondents would recommend this to a friend</p>
+            <div className="flex flex-col items-center text-center lg:text-left">
+              <span className="flex bg-smoke items-center space-x-2 px-2 py-1 text-sm rounded">
+                <TiTick fill="white" className="border-solid border rounded-full" />
+                <p className="text-white">{(averageRating * 20).toFixed(0)}%</p>
+              </span>
+              <p className="text-sm mb-2 w-full lg:w-48">of respondents would recommend this to a friend</p>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Comments Section */}
       <div className="w-full py-10 bg-gray-200">
