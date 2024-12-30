@@ -23,7 +23,8 @@ import { NavMenu } from './navMenu';
 
 export default function Header(): JSX.Element {
   const { cart } = useCartStore();
-  const { user, isLoading } = useUser();
+  const { user } = useUser();
+  const totalCartItems = cart.reduce((acc, item) => acc + item.quantity, 0);
   return (
     <div>
       <header className="w-full py-3 mt-8 fixed top-0 bg-white z-[999] shadow-md">
@@ -61,7 +62,7 @@ export default function Header(): JSX.Element {
                   <Image src={pillow} alt="Pillow" width={28} height={28} />
                   {/* Cart Count Indicator */}
                   <p className="-ml-[23px] -mt-1 text-[10px] size-5 rounded-full text-center p-1 font-bold">
-                    {cart.length}
+                    {totalCartItems}
                   </p>
                 </div>
               }

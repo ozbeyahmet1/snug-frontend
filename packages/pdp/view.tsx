@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useRef, useState } from 'react';
 import { TiTick } from 'react-icons/ti';
+import { toast } from 'sonner';
 
 import AddReview from './components/addReview';
 import RatingDistribution from './components/ratingDistribution';
@@ -58,7 +59,10 @@ export default function ProductDetailPage() {
   ];
 
   const addToCart = useCartStore((state) => state.addToCart);
-
+  const addToCartHandler = (product: Product) => {
+    addToCart(product);
+    toast(`Added ${product.title} to cart!`);
+  };
   const fieldSectionRef = useRef<HTMLDivElement>(null);
 
   const handleScrollToFields = () => {
@@ -141,11 +145,13 @@ export default function ProductDetailPage() {
               <Skeleton className="h-6 w-full rounded-full mb-2" />
             </div>
           )}
-          <button
-            onClick={() => addToCart(product as Product)}
-            className="mt-10 bg-smoke hover:bg-transparent hover:text-smoke duration-300 w-full text-white h-12 lg:h-16 flex items-center justify-center font-bold">
-            Add To Cart
-          </button>
+          {product && (
+            <button
+              onClick={() => addToCartHandler(product)}
+              className="mt-10 bg-smoke hover:bg-transparent hover:text-smoke duration-300 w-full text-white h-12 lg:h-16 flex items-center justify-center font-bold">
+              Add To Cart
+            </button>
+          )}
         </div>
       </div>
 
@@ -189,8 +195,8 @@ export default function ProductDetailPage() {
       {/* Comments Section */}
       <div className="w-full py-10 bg-gray-200">
         <div className="container mx-auto px-4 flex flex-col space-y-5 lg:space-y-10">
-          {user ? (
-            <AddReview isAuthenticated={true} product={product as Product} />
+          {user && product ? (
+            <AddReview product={product as Product} />
           ) : (
             <div className="w-full bg-white text-smoke rounded-md py-3 h-auto flex items-center flex-col justify-center font-semibold">
               <p className="mb-3">Please sign up to leave a comment!</p>

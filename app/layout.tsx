@@ -1,5 +1,6 @@
 import Footer from '@/ui/layout/footer';
 import Header from '@/ui/layout/header';
+import { Toaster } from '@/ui/libComponents/sonner';
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 import type { Metadata } from 'next';
 import { Space_Grotesk } from 'next/font/google';
@@ -58,6 +59,7 @@ export default function RootLayout({
         <UserProvider>
           <Header />
           {children}
+          <Toaster />
           <Footer />
         </UserProvider>
       </body>
