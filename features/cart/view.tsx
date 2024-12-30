@@ -4,8 +4,10 @@ import CheckoutForm from '@/features/cart/components/checkoutButton';
 import { useCartStore } from '@/state/cartState';
 import { Progress } from '@/ui/libComponents/progress';
 import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/ui/libComponents/sheet';
+import { useUser } from '@auth0/nextjs-auth0/client';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import Link from 'next/link';
 import { PropsWithChildren } from 'react';
 import { IoClose, IoGiftOutline } from 'react-icons/io5';
 import { LiaShippingFastSolid } from 'react-icons/lia';
@@ -31,6 +33,7 @@ function CartIcons() {
 }
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY || '');
 export function CartDrawer({ children }: PropsWithChildren) {
+  const { user } = useUser();
   const { cart, increase, decrease, removeFromCart } = useCartStore();
   const cartTotal = cart.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
   const discountValue = 500;
@@ -93,16 +96,24 @@ export function CartDrawer({ children }: PropsWithChildren) {
               <p>Subtotal:</p>
               <p className="font-bold">${cartTotal}</p>
             </div>
-            <Elements stripe={stripePromise}>
-              <CheckoutForm
-                products={cart}
-                background={
-                  ratio == 100
-                    ? 'bg-purple-600 hover:bg-white hover:text-purple-600'
-                    : 'bg-black hover:bg-black hover:text-black'
-                }
-              />
-            </Elements>
+            {user ? (
+              <Elements stripe={stripePromise}>
+                <CheckoutForm
+                  products={cart}
+                  background={
+                    ratio == 100
+                      ? 'bg-purple-600 hover:bg-white hover:text-purple-600'
+                      : 'bg-black hover:bg-black hover:text-black'
+                  }
+                />
+              </Elements>
+            ) : (
+              <Link
+                className=" bg-smoke hover:bg-transparent hover:text-smoke duration-300  text-white p-2 flex items-center justify-center font-bold"
+                href="/api/auth/login">
+                Login to Checkout
+              </Link>
+            )}
           </div>
         </div>
         <SheetClose className="absolute left-5 top-3">
