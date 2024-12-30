@@ -17,7 +17,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/api/products',
-        destination: 'https://snug-backend.onrender.com/products',
+        destination: 'http://localhost:3000/products',
       },
     ];
   },
