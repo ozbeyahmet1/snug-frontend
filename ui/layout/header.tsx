@@ -4,7 +4,9 @@ import pillow from '@/assets/pillow.svg';
 import { CartDrawer } from '@/features/cart/view';
 import { uiSchema } from '@/helpers/data/uiSchema';
 import { useCartStore } from '@/state/cartState';
+import { useUser } from '@auth0/nextjs-auth0/client';
 import Image from 'next/image';
+import Link from 'next/link';
 import { JSX, PropsWithChildren } from 'react';
 import { IoMenuOutline, IoSearchOutline } from 'react-icons/io5';
 
@@ -21,6 +23,7 @@ import { NavMenu } from './navMenu';
 
 export default function Header(): JSX.Element {
   const { cart } = useCartStore();
+  const { user, isLoading } = useUser();
   return (
     <header className="w-full py-3 mt-8 fixed top-0 bg-white z-[999] shadow-md">
       <div className="max-sm:px-5 container mx-auto flex items-center justify-between">
@@ -40,7 +43,15 @@ export default function Header(): JSX.Element {
         {/* Right-side Actions */}
         <div className="flex items-center space-x-2">
           {/* Log In Button (visible on large screens) */}
-          <p className="uppercase hidden lg:flex">Log In</p>
+          {user ? (
+            <Link href="/profile">
+              <img src={user.picture as string} className="w-7 h-7 rounded-full" alt="" />
+            </Link>
+          ) : (
+            <Link className="uppercase hidden lg:flex" href="/api/auth/login">
+              Login
+            </Link>
+          )}
 
           {/* Search Icon */}
           <IoSearchOutline className="cursor-pointer" />
