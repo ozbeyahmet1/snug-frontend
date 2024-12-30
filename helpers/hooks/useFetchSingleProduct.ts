@@ -17,7 +17,7 @@ export const useFetchSingleProduct = (productId: string): UseSingleProductReturn
     setError(null);
 
     try {
-      const response = await fetch(`http://localhost:3000/products/${id}`);
+      const response = await fetch(`https://snug-backend.onrender.com/products/${id}`);
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
