@@ -1,8 +1,10 @@
 'use client';
 
+import pillow from '@/assets/pillow.svg';
 import { useFetchOrdersByUserId } from '@/helpers/hooks/useFetchOrdersByUser';
 import TopBar from '@/ui/layout/topBar';
 import { useUser } from '@auth0/nextjs-auth0/client';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { IoIosLogOut } from 'react-icons/io';
@@ -33,7 +35,6 @@ export default function ProfilePageView(props: IAppProps) {
   return (
     <div>
       <TopBar slides={slides} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} />
-
       <div className="container mx-auto py-12 max-sm:px-6">
         <div className="w-full flex justify-between items-center max-sm:space-y-2">
           <div className="flex items-center justify-start space-x-4">
@@ -50,22 +51,28 @@ export default function ProfilePageView(props: IAppProps) {
             </div>
           </Link>
         </div>
-        <div className="">
-          <h1 className="text-3xl pt-8 pb-4">My Orders</h1>
-          <div className="flex flex-col space-y-4">
-            {orders.map((test, i) => {
-              return (
-                <OrderCard
-                  key={i}
-                  totalAmount={parseInt(test.total_amount)}
-                  date={new Date(test.created_at).toLocaleDateString()}
-                  products={test.products}
-                  orderId={(i + 1).toString()}
-                />
-              );
-            })}
+        {loading ? (
+          <div className="text-lg text-gray-500 h-60 flex items-center w-full justify-center">
+            <Image src={pillow} alt="" width={100} height={100} className="animate-rotate-step" />
           </div>
-        </div>
+        ) : (
+          <div className="">
+            <h1 className="text-3xl pt-8 pb-4">My Orders</h1>
+            <div className="flex flex-col space-y-4">
+              {orders.map((test, i) => {
+                return (
+                  <OrderCard
+                    key={i}
+                    totalAmount={parseInt(test.total_amount)}
+                    date={new Date(test.created_at).toLocaleDateString()}
+                    products={test.products}
+                    orderId={(i + 1).toString()}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

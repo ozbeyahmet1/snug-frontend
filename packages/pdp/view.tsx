@@ -141,7 +141,7 @@ export default function ProductDetailPage() {
           )}
           <button
             onClick={() => addToCart(product as Product)}
-            className="max-sm:mt-10 bg-smoke hover:bg-transparent hover:text-smoke duration-300 w-full text-white h-12 lg:h-16 flex items-center justify-center font-bold">
+            className="mt-10 bg-smoke hover:bg-transparent hover:text-smoke duration-300 w-full text-white h-12 lg:h-16 flex items-center justify-center font-bold">
             Add To Cart
           </button>
         </div>
