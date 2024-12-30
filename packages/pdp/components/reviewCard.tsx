@@ -52,12 +52,12 @@ const ReviewCard: React.FC<ReviewCardProps> = ({ totalStars = 5, rating, title, 
         {/* Rating and Review Title Section */}
         <div className="lg:flex-1">
           <StarRating totalStars={totalStars} rating={+rating} />
-          <p className="text-sm font-semibold text-[#a8a8a8]">{title}</p>
+          <p className="text-sm font-semibold text-[#a8a8a8] max-sm:mt-1">{title}</p>
         </div>
 
         {/* Reviewer Details and Review Content Section */}
-        <div className="lg:flex-[4]">
-          <div className="flex items-center space-x-2 mb-3">
+        <div className="lg:flex-[4] max-sm:mt-1">
+          <div className="flex items-center space-x-2 mb-1 lg:mb-3">
             <h3 className="font-bold">{reviewerName}</h3>
             <p className="text-sm">{reviewDate}</p>
           </div>

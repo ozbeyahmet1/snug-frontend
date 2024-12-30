@@ -27,15 +27,17 @@ export default function TabbedSection({ tabs }: TabbedSectionProps) {
   return (
     <div>
       {/* Tabs Navigation */}
-      <div className="flex items-center border-b-2 border-gray-400 pt-10 pb-3 space-x-6">
-        {tabs.map((tab) => (
-          <button
-            key={tab.key}
-            className={`text-2xl ${activeTab === tab.key ? 'font-bold' : ''}`}
-            onClick={() => handleTabClick(tab.key)}>
-            {tab.label}
-          </button>
-        ))}
+      <div className="  max-sm:w-full overflow-auto">
+        <div className="max-sm:w-[700px] flex pb-3 items-center border-b-2 border-gray-400 space-x-6">
+          {tabs.map((tab) => (
+            <button
+              key={tab.key}
+              className={`text-2xl ${activeTab === tab.key ? 'font-bold' : ''}`}
+              onClick={() => handleTabClick(tab.key)}>
+              {tab.label}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Tab Content */}

@@ -3,12 +3,12 @@ import { useState } from 'react';
 
 import FillableStar from './fillableStar';
 
-export interface AddCommentProps {
+export interface AddReviewProps {
   isAuthenticated: boolean;
   product: Product;
 }
 
-export default function AddComment({ isAuthenticated, product }: AddCommentProps) {
+export default function AddReview({ isAuthenticated, product }: AddReviewProps) {
   const [formState, setFormState] = useState({
     rating: '4.43',
     review: 'Authentic!',

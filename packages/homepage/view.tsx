@@ -19,7 +19,11 @@ export default function HomepageView() {
     <div>
       <TopBar slides={uiSchema.topBar} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} />
       <HeroSection boxColor={uiSchema.topBar[currentIndex].bgColor} heroSectionContents={uiSchema.heroSection} />
-      <FavoritesSection favoriteItems={products?.slice(0, 4) as Array<Product>} {...uiSchema.favoritesSection} />
+      <FavoritesSection
+        isLoading={isLoading}
+        favoriteItems={products?.slice(0, 4) as Array<Product>}
+        {...uiSchema.favoritesSection}
+      />
       <TestimonalsSection {...uiSchema.testimonialSection} />
       <BannerSection {...uiSchema.bannerSection} />
       <DiscountBanner {...uiSchema.discountSection} />

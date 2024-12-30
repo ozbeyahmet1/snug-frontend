@@ -40,9 +40,9 @@ const mobileMenuLinks: Array<MobileMenuLink> = [
 ];
 
 const heroBannerContents = {
-  text: 'Favorite for a reason',
-  slogan: 'Gift Away',
-  buttonText: 'Shop Now',
+  text: 'Cozy for a reason',
+  slogan: 'Snug & Share',
+  buttonText: 'Discover Now',
   images: [
     'https://res.cloudinary.com/dhx4s2n3l/image/upload/v1735088126/PE906374_y9thj9-removebg-preview_f2sbzo.png',
     'https://res.cloudinary.com/dhx4s2n3l/image/upload/v1735089614/DALL_E_2024-12-25_04.19.53_-_A_stack_of_four_rectangular_pillows_arranged_neatly_on_top_of_one_another_each_with_a_unique_color_and_texture._The_top_pillow_is_light_brown_follo_thuqu9.webp',
@@ -98,23 +98,23 @@ export const uiSchema: uiSchemaType = {
   mobileMenuLinks: mobileMenuLinks,
   heroSection: heroBannerContents,
   testimonialSection: {
-    header: 'What our happy customers are saying',
+    header: 'What our cozy customers are saying',
     testimonials,
   },
   favoritesSection: {
-    header: 'A few our',
-    subheader: 'Favorites',
+    header: 'A few of our',
+    subheader: 'Cozy Favorites',
   },
   bannerSection: {
-    header: 'Up to £100 off any three suitcases',
+    header: 'Up to 30% off select pillows',
     subheader:
-      'Jet-set in style. Save up to £100 on any combination of suitcases—all styles, all colors, all sizes. Buy two and save £50, buy three and save £100.',
-    buttonText: 'Shop Sets',
+      'Transform your space with the perfect touch of comfort. Save up to 30% on select pillows—various styles, colors, and sizes available. Limited time offer!',
+    buttonText: 'Shop Pillows',
     href: '/collections/sale',
     image: 'https://res.cloudinary.com/dhx4s2n3l/image/upload/v1735254731/8680214199435-10_mb6vzk.webp',
   },
   discountSection: {
-    message: 'Save up to 50% off and snag end of season styles',
+    message: 'Save up to 40% on your next cozy companion',
     buttonText: 'Shop Now',
     href: '/collections/sale',
   },

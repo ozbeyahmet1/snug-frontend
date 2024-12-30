@@ -3,11 +3,15 @@
 import { useFetchSingleProduct } from '@/helpers/hooks/useFetchSingleProduct';
 import { useCartStore } from '@/state/cartState';
 import TopBar from '@/ui/layout/topBar';
+import { Skeleton } from '@/ui/libComponents/skeleton';
+import { useUser } from '@auth0/nextjs-auth0/client';
+import Image from 'next/image';
+import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useRef, useState } from 'react';
 import { TiTick } from 'react-icons/ti';
 
-import AddComment from './components/addComment';
+import AddReview from './components/addReview';
 import RatingDistribution from './components/ratingDistribution';
 import ReviewCard from './components/reviewCard';
 import StarRating from './components/starRating';
@@ -32,7 +36,7 @@ export default function ProductDetailPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const params = useParams();
   const { url } = params;
-
+  const { user } = useUser();
   const { product, isLoading, error, refetch } = useFetchSingleProduct(url as string);
 
   const tabs = [
@@ -78,31 +82,68 @@ export default function ProductDetailPage() {
       {/* Product Section */}
       <div className="flex flex-col lg:flex-row items-center bg-beige">
         <div className="w-full lg:w-1/2 h-full py-10 px-4 lg:px-20">
-          <img src={product?.image} alt="Product Image" className="w-full h-auto aspect-square" />
+          <div className="h-[300px] w-[300px] md:h-[400px] md:w-[400px] lg:h-[600px] lg:w-[600px] mx-auto">
+            {!isLoading && product && (
+              <Image
+                src={product.image}
+                alt="Product Image"
+                className="w-full h-auto aspect-square animate-fadeIn"
+                width={600}
+                height={600}
+              />
+            )}
+          </div>
         </div>
         <div className="w-full lg:w-1/2 h-full py-10 px-4 lg:px-10">
           <p className="text-sm">Pillow / Cushions</p>
           <div className="flex items-center justify-between py-6 text-xl lg:text-3xl">
-            <h1 className="font-bold">{product?.title}</h1>
-            <p>${product?.price}</p>
+            {!isLoading ? (
+              <h1 className="font-bold">{product?.title}</h1>
+            ) : (
+              <Skeleton className="h-8 w-60 rounded-full" />
+            )}
+            {!isLoading ? (
+              <p className="animate-fadeIn">${product?.price}</p>
+            ) : (
+              <Skeleton className="h-8 w-32 rounded-full" />
+            )}
           </div>
           <div className="flex items-center space-x-2">
-            <StarRating totalStars={5} rating={averageRating} />
-            <p>({averageRating.toFixed(2)})</p>
-            <p>{product?.reviews.length} Reviews</p>
+            {!isLoading ? (
+              <StarRating totalStars={5} rating={averageRating} />
+            ) : (
+              <Skeleton className="h-8 w-32 rounded-full" />
+            )}
+            {!isLoading ? (
+              <p className="animate-fadeIn">({averageRating.toFixed(2)})</p>
+            ) : (
+              <Skeleton className="h-8 w-8 rounded-full" />
+            )}
+            {!isLoading ? (
+              <p className="animate-fadeIn">{product?.reviews.length} Reviews</p>
+            ) : (
+              <Skeleton className="h-8 w-32 rounded-full" />
+            )}
           </div>
           <div className="my-3 w-full h-12 bg-[#ddcdb2] flex items-center justify-center text-center">
             Secure your payment with Stripe
           </div>
-          <div className="mb-3">
-            <p className="inline">{product?.description}</p>
-            <p className="inline ml-2 border-b-2 border-black cursor-pointer" onClick={handleScrollToFields}>
-              Read more
-            </p>
-          </div>
+          {!isLoading ? (
+            <div className="mb-7 h-20 lg:h-12 animate-fadeIn">
+              <p className="inline">{product?.description}</p>
+              <p className="inline ml-2 border-b-2 border-black cursor-pointer" onClick={handleScrollToFields}>
+                Read more
+              </p>
+            </div>
+          ) : (
+            <div className="mb-7 h-20 lg:h-12">
+              <Skeleton className="h-6 w-full rounded-full mb-2" />
+              <Skeleton className="h-6 w-full rounded-full mb-2" />
+            </div>
+          )}
           <button
             onClick={() => addToCart(product as Product)}
-            className="bg-smoke hover:bg-transparent hover:text-smoke duration-300 w-full text-white h-12 lg:h-16 flex items-center justify-center font-bold">
+            className="mt-10 bg-smoke hover:bg-transparent hover:text-smoke duration-300 w-full text-white h-12 lg:h-16 flex items-center justify-center font-bold">
             Add To Cart
           </button>
         </div>
@@ -147,8 +188,20 @@ export default function ProductDetailPage() {
 
       {/* Comments Section */}
       <div className="w-full py-10 bg-gray-200">
-        <div className="container mx-auto px-4 flex flex-col space-y-10">
-          <AddComment isAuthenticated={true} product={product as Product} />
+        <div className="container mx-auto px-4 flex flex-col space-y-5 lg:space-y-10">
+          {user ? (
+            <AddReview isAuthenticated={true} product={product as Product} />
+          ) : (
+            <div className="w-full bg-white text-smoke rounded-md py-3 h-auto flex items-center flex-col justify-center font-semibold">
+              <p className="mb-3">Please sign up to leave a comment!</p>
+              <Link
+                href="/api/auth/login"
+                className="bg-smoke px-10 py-2 text-white hover:bg-white hover:text-smoke duration-300">
+                Login
+              </Link>
+            </div>
+          )}
+
           {product?.reviews.map((review, i) => (
             <ReviewCard
               totalStars={5}
