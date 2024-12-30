@@ -13,6 +13,14 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/api/products',
+        destination: 'https://snug-backend.onrender.com/products',
+      },
+    ];
+  },
 };
 
 export default nextConfig;
