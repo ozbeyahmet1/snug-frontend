@@ -51,7 +51,7 @@ export function useFetchOrdersByUserId(userId: string): UseFetchOrdersResult {
         setError(null);
 
         // Replace with your API endpoint
-        const response = await axios.get<Order[]>(`${process.env.BACKEND_URL}/orders/${userId}`);
+        const response = await axios.get<Order[]>(`https://snug-backend.onrender.com/orders/${userId}`);
 
         setOrders(response.data);
       } catch (err) {

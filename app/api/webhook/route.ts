@@ -47,7 +47,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
       // Send order details to the backend
       try {
-        const response = await axios.post(`${process.env.BACKEND_URL}/orders`, {
+        const response = await axios.post(`https://snug-backend.onrender.com/orders`, {
           userId,
           totalAmount,
           productIds,

@@ -27,7 +27,7 @@ export const useCreateComment = (): UseCreateCommentReturn => {
     setSuccess(false);
 
     try {
-      const response = await axios.post(`${process.env.BACKEND_URL}/reviews`, {
+      const response = await axios.post(`https://snug-backend.onrender.com/reviews`, {
         rating: params.rating,
         review: params.review,
         reviewer: params.reviewer,

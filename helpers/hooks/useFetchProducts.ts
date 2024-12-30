@@ -17,7 +17,7 @@ export const useProducts = (): UseProductsReturn => {
     setError(null);
 
     try {
-      const response = await fetch(`${process.env.BACKEND_URL}/products`);
+      const response = await fetch(`https://snug-backend.onrender.com/products`);
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
