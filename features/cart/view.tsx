@@ -38,6 +38,8 @@ export function CartDrawer({ children }: PropsWithChildren) {
   const cartTotal = cart.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
   const discountValue = 500;
   const ratio = cartTotal > discountValue ? 100 : 100 - ((discountValue - cartTotal) / discountValue) * 100;
+  const totalCartItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+
   return (
     <Sheet modal={true}>
       <SheetTrigger asChild>{children}</SheetTrigger>
@@ -49,7 +51,7 @@ export function CartDrawer({ children }: PropsWithChildren) {
         <div className="flex flex-col items-center justify-center">
           <span className="flex items-center space-x-1 text-sm pt-3">
             <p>MY CART</p>
-            <p className="text-gray-500">({cart.length})</p>
+            <p className="text-gray-500">({totalCartItems})</p>
           </span>
           <div className="px-3 w-full">
             <Progress value={ratio} className="h-3 mt-3 " color={ratio == 100 ? 'bg-purple-600' : 'bg-black'} />
