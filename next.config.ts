@@ -13,6 +13,14 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/api/products',
+        destination: 'http://localhost:3000/products',
+      },
+    ];
+  },
 };
 
 export default nextConfig;

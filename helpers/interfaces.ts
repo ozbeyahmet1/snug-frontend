@@ -10,7 +10,7 @@ interface Product {
 }
 
 interface Review {
-  rating: number;
+  rating: string;
   review: string;
   reviewer: string;
   summary: string;

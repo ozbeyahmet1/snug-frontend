@@ -1,5 +1,6 @@
 import Footer from '@/ui/layout/footer';
 import Header from '@/ui/layout/header';
+import { UserProvider } from '@auth0/nextjs-auth0/client';
 import type { Metadata } from 'next';
 import { Space_Grotesk } from 'next/font/google';
 
@@ -54,9 +55,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${spaceGrotesk.className} antialiased pt-20`}>
-        <Header />
-        {children}
-        <Footer />
+        <UserProvider>
+          <Header />
+          {children}
+          <Footer />
+        </UserProvider>
       </body>
     </html>
   );

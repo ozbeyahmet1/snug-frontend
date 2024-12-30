@@ -1,4 +1,5 @@
 import type { CartItem } from '@/state/cartState';
+import { getSession } from '@auth0/nextjs-auth0';
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
@@ -19,6 +20,13 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     // Parse the request body to extract products
     const { products }: { products: CartItem[] } = (await req.json()) as { products: CartItem[] };
 
+    // Get the session to retrieve the user info
+    const session = await getSession(req, new NextResponse());
+    if (!session || !session.user) {
+      return NextResponse.json({ error: 'User not authenticated' }, { status: 401 });
+    }
+
+    const userId = (session.user.sub as string).replace('auth0|', ''); // Auth0 user ID
     // Map products to Stripe line items
     const lineItems = products.map((product) => ({
       price_data: {
@@ -36,16 +44,16 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     }));
 
     // Create a Stripe Checkout Session
-    const session = await stripe.checkout.sessions.create({
+    const sessionStripe = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: lineItems,
       mode: 'payment',
       success_url: `${req.headers.get('origin')}/success`,
       cancel_url: `${req.headers.get('origin')}/cancel`,
-      metadata: { user_id: 99 },
+      metadata: { user_id: userId }, // Attach user ID to metadata
     });
 
-    return NextResponse.json({ url: session.url });
+    return NextResponse.json({ url: sessionStripe.url });
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.error('Error creating Checkout Session:', error);

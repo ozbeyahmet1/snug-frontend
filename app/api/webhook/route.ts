@@ -1,3 +1,4 @@
+import axios from 'axios';
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
@@ -45,20 +46,20 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       });
 
       // Send order details to the backend
-      const response = await fetch(`https://snug-backend.onrender.com/orders`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+      try {
+        const response = await axios.post(`https://snug-backend.onrender.com/orders`, {
           userId,
           totalAmount,
           productIds,
-        }),
-      });
+        });
 
-      if (!response.ok) {
-        console.error('Failed to create order:', await response.text());
-      } else {
-        console.log('Order created successfully:', await response.json());
+        if (response.status === 200) {
+          console.log('Order created successfully:', response.data);
+        } else {
+          console.error('Failed to create order:', response.data);
+        }
+      } catch (error) {
+        console.error('Error creating order:', error);
       }
     } catch (error) {
       console.error('Error processing checkout session:', error);

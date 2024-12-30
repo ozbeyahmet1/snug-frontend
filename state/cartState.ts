@@ -5,7 +5,7 @@ import { persist } from 'zustand/middleware';
  * Interface representing a review for a product.
  */
 interface Review {
-  rating: number;
+  rating: string;
   review: string;
   reviewer: string;
   summary: string;

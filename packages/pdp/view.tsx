@@ -7,6 +7,7 @@ import { useParams } from 'next/navigation';
 import { useRef, useState } from 'react';
 import { TiTick } from 'react-icons/ti';
 
+import AddComment from './components/addComment';
 import RatingDistribution from './components/ratingDistribution';
 import ReviewCard from './components/reviewCard';
 import StarRating from './components/starRating';
@@ -66,29 +67,31 @@ export default function ProductDetailPage() {
     }
   };
 
-  const avarageRating = product?.reviews
-    ? product.reviews.reduce((acc, review) => acc + review.rating, 0) / product.reviews.length
+  const averageRating = product?.reviews
+    ? product.reviews.reduce((acc, review) => acc + +review.rating, 0) / product.reviews.length
     : 0;
 
   return (
     <div className="pt-3">
       <TopBar slides={slides} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} />
-      <div className="h-[600px] flex items-center bg-beige">
-        <div className="w-1/2  h-full py-10 px-20">
-          <img src={product?.image} alt="" className="w-full h-full aspect-square" />
+
+      {/* Product Section */}
+      <div className="flex flex-col lg:flex-row items-center bg-beige">
+        <div className="w-full lg:w-1/2 h-full py-10 px-4 lg:px-20">
+          <img src={product?.image} alt="Product Image" className="w-full h-auto aspect-square" />
         </div>
-        <div className="w-1/2 h-full py-20 px-10">
-          <p>Pillow / Cushions</p>
-          <div className="flex items-center justify-between py-6 text-3xl">
+        <div className="w-full lg:w-1/2 h-full py-10 px-4 lg:px-10">
+          <p className="text-sm">Pillow / Cushions</p>
+          <div className="flex items-center justify-between py-6 text-xl lg:text-3xl">
             <h1 className="font-bold">{product?.title}</h1>
             <p>${product?.price}</p>
           </div>
           <div className="flex items-center space-x-2">
-            <StarRating totalStars={5} rating={4.5} />
-            <p>({avarageRating})</p>
+            <StarRating totalStars={5} rating={averageRating} />
+            <p>({averageRating.toFixed(2)})</p>
             <p>{product?.reviews.length} Reviews</p>
           </div>
-          <div className="my-3 w-full h-12 bg-[#ddcdb2] flex items-center justify-center">
+          <div className="my-3 w-full h-12 bg-[#ddcdb2] flex items-center justify-center text-center">
             Secure your payment with Stripe
           </div>
           <div className="mb-3">
@@ -99,25 +102,27 @@ export default function ProductDetailPage() {
           </div>
           <button
             onClick={() => addToCart(product as Product)}
-            className="bg-smoke hover:bg-transparent hover:text-smoke duration-300 w-full text-white h-16 flex items-center justify-center font-bold">
-            Add To Cart $245
+            className="bg-smoke hover:bg-transparent hover:text-smoke duration-300 w-full text-white h-12 lg:h-16 flex items-center justify-center font-bold">
+            Add To Cart
           </button>
         </div>
       </div>
+
+      {/* Fields Section */}
       <div className="bg-beige pb-10" ref={fieldSectionRef}>
-        <div className="container mx-auto">
+        <div className="container mx-auto px-4">
           <FieldsSection tabs={tabs} />
         </div>
       </div>
 
       {/* Reviews Section */}
-      <div className="container mx-auto py-10">
-        <h1 className="font-bold text-3xl">Reviews</h1>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-20">
+      <div className="container mx-auto px-4 py-10">
+        <h1 className="font-bold text-xl lg:text-3xl">Reviews</h1>
+        <div className="flex flex-col lg:flex-row items-start justify-between space-y-4 lg:space-y-0">
+          <div className="flex flex-col lg:flex-row items-center space-y-2 lg:space-y-0 lg:items-start lg:space-x-20">
             <div className="flex flex-col items-center">
-              <p className="text-2xl mb-2">{avarageRating.toFixed(1)}</p>
-              <StarRating totalStars={5} rating={5} />
+              <p className="text-2xl mb-2">{averageRating.toFixed(2)}</p>
+              <StarRating totalStars={5} rating={averageRating} />
               <p className="mt-2">{product?.reviews.length} Reviews</p>
             </div>
             <RatingDistribution
@@ -130,31 +135,33 @@ export default function ProductDetailPage() {
               ]}
             />
           </div>
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center text-center lg:text-left">
             <span className="flex bg-smoke items-center space-x-2 px-2 py-1 text-sm rounded">
               <TiTick fill="white" className="border-solid border rounded-full" />
-              <p className="text-white">{avarageRating * 20}%</p>
+              <p className="text-white">{(averageRating * 20).toFixed(0)}%</p>
             </span>
-            <p className="text-sm mb-2 w-48 text-center">of respondents would recommend this to a friend</p>
+            <p className="text-sm mb-2 w-full lg:w-48">of respondents would recommend this to a friend</p>
           </div>
         </div>
       </div>
 
+      {/* Comments Section */}
       <div className="w-full py-10 bg-gray-200">
-        <div className="container mx-auto flex flex-col space-y-10">
-          {product?.reviews.map((review, i) => {
-            return (
-              <ReviewCard
-                totalStars={review.rating}
-                rating={review.rating}
-                title={review.summary}
-                review={review.review}
-                reviewerName={review.reviewer}
-                reviewDate={new Date(review.timestamp).toDateString()}
-                key={i}
-              />
-            );
-          })}
+        <div className="container mx-auto px-4 flex flex-col space-y-10">
+          <AddComment isAuthenticated={true} product={product as Product} />
+          {product?.reviews.map((review, i) => (
+            <ReviewCard
+              totalStars={5}
+              rating={+review.rating}
+              title={review.summary}
+              review={review.review}
+              reviewerName={review.reviewer}
+              reviewDate={
+                new Date(review.timestamp).toLocaleDateString() + ' ' + new Date(review.timestamp).toLocaleTimeString()
+              }
+              key={i}
+            />
+          ))}
         </div>
       </div>
     </div>
