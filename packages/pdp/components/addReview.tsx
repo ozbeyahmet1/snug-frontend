@@ -1,6 +1,7 @@
 import { useCreateComment } from '@/helpers/hooks/useCreateComment';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import { useState } from 'react';
+import { toast } from 'sonner';
 
 import FillableStar from './fillableStar';
 
@@ -25,7 +26,6 @@ export default function AddReview({ product }: AddReviewProps) {
     summary: 'Marvellous',
     product: product,
   });
-  console.log('formState', formState);
   const { createComment } = useCreateComment();
   return (
     <div className="w-full">
@@ -54,7 +54,10 @@ export default function AddReview({ product }: AddReviewProps) {
           />
           <div className="w-full flex items-end justify-end">
             <button
-              onClick={() => createComment(formState)}
+              onClick={() => {
+                createComment(formState);
+                toast('Comment added successfully');
+              }}
               className="rounded-md uppercase bg-smoke text-white px-5 py-3 sm:px-7 sm:py-4 font-semibold hover:bg-white hover:text-smoke duration-300 cursor-pointer">
               Post
             </button>
