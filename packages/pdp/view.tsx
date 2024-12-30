@@ -4,7 +4,9 @@ import { useFetchSingleProduct } from '@/helpers/hooks/useFetchSingleProduct';
 import { useCartStore } from '@/state/cartState';
 import TopBar from '@/ui/layout/topBar';
 import { Skeleton } from '@/ui/libComponents/skeleton';
+import { useUser } from '@auth0/nextjs-auth0/client';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useRef, useState } from 'react';
 import { TiTick } from 'react-icons/ti';
@@ -34,7 +36,7 @@ export default function ProductDetailPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const params = useParams();
   const { url } = params;
-
+  const { user } = useUser();
   const { product, isLoading, error, refetch } = useFetchSingleProduct(url as string);
 
   const tabs = [
@@ -187,7 +189,19 @@ export default function ProductDetailPage() {
       {/* Comments Section */}
       <div className="w-full py-10 bg-gray-200">
         <div className="container mx-auto px-4 flex flex-col space-y-5 lg:space-y-10">
-          <AddReview isAuthenticated={true} product={product as Product} />
+          {user ? (
+            <AddReview isAuthenticated={true} product={product as Product} />
+          ) : (
+            <div className="w-full bg-white text-smoke rounded-md py-3 h-auto flex items-center flex-col justify-center font-semibold">
+              <p className="mb-3">Please sign up to leave a comment!</p>
+              <Link
+                href="/api/auth/login"
+                className="bg-smoke px-10 py-2 text-white hover:bg-white hover:text-smoke duration-300">
+                Login
+              </Link>
+            </div>
+          )}
+
           {product?.reviews.map((review, i) => (
             <ReviewCard
               totalStars={5}

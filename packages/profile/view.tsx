@@ -11,9 +11,7 @@ import { IoIosLogOut } from 'react-icons/io';
 
 import OrderCard from './components/orderCard';
 
-export interface IAppProps {}
-
-export default function ProfilePageView(props: IAppProps) {
+export default function ProfilePageView() {
   const { user, isLoading } = useUser();
   const userId = (user?.sub as string)?.replace('auth0|', '');
   const slides = [
